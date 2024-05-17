@@ -40,10 +40,11 @@ exports.adminSignIn = catchAsyncError (async(req, res, next) => {
     sendToken(admin, 200, res);
 });
 
-exports.adminSignOut = catchAsyncError (async(req, res, next) => {
+exports.adminSignOut = catchAsyncError(async (req, res, next) => {
     res.clearCookie("token");
-    res.json({message: "Sign out successfully"})
+    return res.status(200).json({ message: "Signed out successfully" });
 });
+
 
 exports.adminForgot = catchAsyncError (async(req, res, next) => {
     const admin = await Admin.findOne({email: req.body.email})

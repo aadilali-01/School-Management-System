@@ -18,10 +18,10 @@ const { catchAsyncError } = require("./catchAsyncError.js");
 
 exports.isAuthenticated  = catchAsyncError(async(req,res,next)=>{
   const token = req.headers.authorization.split(" ")[1];
+  console.log(token);
   if (!token) {
     return next(new ErrorHandler("Please login to access the resource", 401));
   }
   const user = jwt.verify(token,process.env.JWT_SECRET)
-  console.log(token);
   next();
 })
